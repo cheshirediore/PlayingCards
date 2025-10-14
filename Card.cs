@@ -5,6 +5,10 @@ namespace CheshireDiore.PlayingCards
         private int _rank; // Aces high
         private int _suit; // 0 = Spades, 1 = Clubs, 2 = Hearts, 3 = Diamonds
 
+        public int Rank => _rank;
+
+        public string Suit => _suitToString[_suit];
+
         private static Dictionary<int, string> _suitToString = new Dictionary<int, string>{
             {0, "Spades"},
             {1, "Clubs"},
@@ -38,5 +42,6 @@ namespace CheshireDiore.PlayingCards
         {
             return $"{_rankToString[_rank]} of {_suitToString[_suit]}";
         }
+
     }
 }

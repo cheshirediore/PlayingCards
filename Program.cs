@@ -1,26 +1,42 @@
 ﻿using CheshireDiore.PlayingCards;
 
-// See https://aka.ms/new-console-template for more information
+int TestNumber = 1;
 
-// Initialize an empty deck
-Deck deck = new();
-// Add the 52 standard playing cards
-for (int suit = 0; suit < 4; suit++)
+// Test the basic methods of the Deck class
+if (TestNumber == 0)
 {
-    for (int rank = 2; rank < 15; rank++)
+    // Initialize an empty deck
+    Deck deck = new();
+    deck.FillDeck();
+    // Shuffle the deck
+    deck.Shuffle();
+
+    // Deal a hand of 5 cards from the deck
+    Deck hand = deck.Deal(5);
+    // Read each card from hand
+    foreach (Card card in hand.Cards)
     {
-        Card card = new(rank, suit);
-        deck.AddCard(card);
+        Console.WriteLine($"DEBUG> Program.cs: {card}");
     }
 }
-// Shuffle the deck
-// TODO: Implement shuffle
-deck.Shuffle();
 
-// Deal a hand of 5 cards from the deck
-Deck hand = deck.Deal(5);
-// Read each card from hand
-foreach (Card card in hand.Cards)
+// Test the basic methods of the BlackJack class
+if (TestNumber == 1)
 {
-    Console.WriteLine($"DEBUG> Program.cs: {card}");
+    BlackJack blackjack = new();
+
+    Deck drawpile = blackjack.DrawPile;
+    CardHolder dealer = blackjack.Dealer;
+    CardHolder player = blackjack.Player;
+
+    blackjack.NewGame();
+    Console.WriteLine($"DEBUG> Program.cs: Dealer now has {dealer.HeldCards.Count} cards");
+    Console.WriteLine($"DEBUG> Program.cs: Player now has {player.HeldCards.Count} cards");
+
+    bool keepPlaying = true;
+
+    while (keepPlaying)
+    {
+        keepPlaying = blackjack.NextRound();
+    }
 }
