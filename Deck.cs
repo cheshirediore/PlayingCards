@@ -18,10 +18,10 @@ namespace CheshireDiore.PlayingCards
 
         public void AddCard(Card card)
         {
-            // Console.WriteLine($"DEBUG> Deck.cs: Adding card: {card}");
+            // // Console.WriteLine($"DEBUG> Deck.cs: Adding card: {card}");
             _cards.Push(card);
-            // Console.WriteLine($"DEBUG> Deck.cs: Deck now contains {_cards.Count} cards.");
-            // Console.WriteLine($"DEBUG> Deck.cs: Deck stack now has a capacity of {_cards.Capacity}.");
+            // // Console.WriteLine($"DEBUG> Deck.cs: Deck now contains {_cards.Count} cards.");
+            // // Console.WriteLine($"DEBUG> Deck.cs: Deck stack now has a capacity of {_cards.Capacity}.");
         }
         public Card DrawCard()
         {
@@ -41,12 +41,12 @@ namespace CheshireDiore.PlayingCards
             // Start the shuffling
             for (int i = workingCopy.Length - 1; i >= 0; i--)
             {
-                // Console.WriteLine($"DEBUG> Deck.cs: i = {i}");
+                // // Console.WriteLine($"DEBUG> Deck.cs: i = {i}");
                 var value1 = workingCopy[i];
                 int randomlySelectedIndex = random.Next(i);
-                // Console.WriteLine($"DEBUG> Deck.cs: j = {randomlySelectedIndex}");
+                // // Console.WriteLine($"DEBUG> Deck.cs: j = {randomlySelectedIndex}");
                 var value2 = workingCopy[randomlySelectedIndex];
-                // Console.WriteLine($"DEBUG> Deck.cs: Swapping {value1} and {value2}");
+                // // Console.WriteLine($"DEBUG> Deck.cs: Swapping {value1} and {value2}");
                 workingCopy[i] = value2;
                 workingCopy[randomlySelectedIndex] = value1;
             }
@@ -65,10 +65,10 @@ namespace CheshireDiore.PlayingCards
             {
                 // _cards.Pop());
                 Card card = DrawCard();
-                // Console.WriteLine($"DEBUG> Deck.cs: Dealing {card}...");
+                // // Console.WriteLine($"DEBUG> Deck.cs: Dealing {card}...");
                 dealtCards.AddCard(card);
             }
-            // Console.WriteLine($"DEBUG> Deck.cs: Dealt {dealtCards.Count} cards");
+            // // Console.WriteLine($"DEBUG> Deck.cs: Dealt {dealtCards.Count} cards");
             return dealtCards;
         }
 

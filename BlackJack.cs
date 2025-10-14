@@ -11,16 +11,16 @@ namespace CheshireDiore.PlayingCards
         public BlackJack()
         {
             // Initialize the deck that will be dealt from and shuffle it
-            Console.WriteLine("DEBUG> BlackJack(): Building DrawPile");
+            // // Console.WriteLine("DEBUG> BlackJack(): Building DrawPile");
             _drawpile = new();
             DrawPile.FillDeck();
             DrawPile.Shuffle();
             // Initialize the card holder array and populate it
-            Console.WriteLine("DEBUG> BlackJack(): Building _cardholders");
+            // // Console.WriteLine("DEBUG> BlackJack(): Building _cardholders");
             _cardholders = new CardHolder[2];
-            Console.WriteLine("DEBUG> BlackJack(): Adding Dealere");
+            // // Console.WriteLine("DEBUG> BlackJack(): Adding Dealere");
             _cardholders[0] = new CardHolder();
-            Console.WriteLine("DEBUG> BlackJack(): Adding Player");
+            // // Console.WriteLine("DEBUG> BlackJack(): Adding Player");
             _cardholders[1] = new CardHolder();
         }
 
@@ -53,12 +53,15 @@ namespace CheshireDiore.PlayingCards
             Console.WriteLine("====================================");
             Console.WriteLine("Your cards are:");
             Player.PrintHeldCards();
+            Console.WriteLine("====================================");
             
             Console.WriteLine("====================================");
             Console.WriteLine("The dealer is showing:");
             Dealer.PrintHeldCards(1);
+            Console.WriteLine("====================================");
             
             // Prompt player to hit or stand
+            Console.WriteLine("");
             Console.WriteLine("Hit (h) or Stand (s) (q to quit)?");
             string playerResponse = Console.ReadLine();
             if (playerResponse == "q")
@@ -66,35 +69,11 @@ namespace CheshireDiore.PlayingCards
                 return false;
             } else if (playerResponse == "h")
             {
-                // If hit, deal a card
-                Player.Draw(DrawPile);
-                Console.WriteLine("Your cards are:");
-                Player.PrintHeldCards();
-
-                // Tally player's hand and check if they bust
-                int playerTotal = 0;
-                for (int i = 0; i < Player.CardsArray.Length; i++)
-                {
-                    Card card = Player.CardsArray[i];
-                    Console.WriteLine($"DEBUG> BlackJack.NextRound(): Player card {card.Rank} is worth = {GetCardValue(card.Rank)}");
-                    playerTotal += GetCardValue(card.Rank);
-                }
-                Console.WriteLine($"DEBUG> BlackJack.NextRound(): Player total = {playerTotal}");
-                if (playerTotal > 21) // Bust
-                {
-                    Console.WriteLine("** BUST **");
-                    Console.WriteLine("Better Luck Next Time!");
-                    return false;
-                } else if (playerTotal == 21)
-                {
-                    Console.WriteLine("** You win! **");
-                    return false;
-                }
-            } else {
-                // If the player has chosen to stand, deal cards for dealer while the dealer's sum is less than 17
-                Console.WriteLine("Dealer Behavior Not Implemented");
-
+                return PlayerTurn();
+            } else if (playerResponse == "s") {
+                return DealerTurn();
             }
+            Console.WriteLine("-----------NewRound----------");
             return true;
         }
         #endregion
@@ -115,6 +94,93 @@ namespace CheshireDiore.PlayingCards
                 default:
                     return -1;
             }
+        }
+
+        private int TallyCards(CardHolder cardHolder)
+        {
+            int tally = 0;
+            for (int i = 0; i < cardHolder.CardsArray.Length; i++)
+            {
+                Card card = cardHolder.CardsArray[i];
+                tally += GetCardValue(card.Rank);
+            }
+            // Console.WriteLine($"Tally is {tally}");
+            return tally;
+        }
+
+        private bool PlayerTurn()
+        {
+            // If hit, deal a card
+            Player.Draw(DrawPile);
+            Console.WriteLine("Your cards are:");
+            Player.PrintHeldCards();
+
+            // Tally player's hand and check if they bust
+            int playerTotal = TallyCards(Player);
+            if (playerTotal > 21) // Bust
+            {
+                Console.WriteLine("** BUST **");
+                Console.WriteLine("Better Luck Next Time!");
+                return false;
+            } else if (playerTotal == 21)
+            {
+                Console.WriteLine("** You win! **");
+                return false;
+            }
+            return true;
+        }
+
+        private bool DealerTurn()
+        {
+            // First, flip the dealer's hole card and tally their starting total
+            Console.WriteLine("====================================");
+            Console.WriteLine("The dealer is showing:");
+            Dealer.PrintHeldCards();
+            Console.WriteLine("====================================");
+            int dealerTotal = TallyCards(Dealer);
+            while (dealerTotal < 17)
+            {
+
+                // If the player has chosen to stand, deal cards for dealer while the dealer's sum is less than 17
+                Dealer.Draw(DrawPile);
+                Console.WriteLine("The Dealer Draws a Card:");
+                Dealer.PrintHeldCards();
+
+                // Tally dealer's hand and check if they bust
+                Console.WriteLine($"DEBUG> BlackJack(): Tallying Dealer score");
+                dealerTotal = TallyCards(Dealer);
+                
+                if (dealerTotal > 21) // Bust
+                {
+                    Console.WriteLine("** DEALER BUSTS **");
+                    Console.WriteLine("You Win!");
+                    return false;
+                }
+                Console.WriteLine("=== Press Enter to Continue ==");
+                string playerResponse = Console.ReadLine();
+                if (playerResponse == "q")
+                {
+                    return false;
+                }
+            }
+            // Now that the player has chosen to Stand, and the dealer has finished drawing, compare the totals
+            int playerTotal = TallyCards(Player);
+            dealerTotal = TallyCards(Dealer);
+            Console.WriteLine($"Player's Total {playerTotal}");
+            Console.WriteLine($"Dealer's Total {dealerTotal}");
+            if (playerTotal > dealerTotal)
+            {
+                // Player Wins
+                Console.WriteLine("You Win!");
+            } else if (playerTotal == dealerTotal)
+            {
+                // Draw
+                Console.WriteLine("It's a Draw!");
+            } else {
+                // Dealer Wins
+                Console.WriteLine("Dealer Wins! Better Luck Next Time!");
+            }
+            return false;
         }
     }
 }

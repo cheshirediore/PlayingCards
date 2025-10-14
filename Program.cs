@@ -16,7 +16,7 @@ if (TestNumber == 0)
     // Read each card from hand
     foreach (Card card in hand.Cards)
     {
-        Console.WriteLine($"DEBUG> Program.cs: {card}");
+        // Console.WriteLine($"DEBUG> Program.cs: {card}");
     }
 }
 
@@ -30,8 +30,8 @@ if (TestNumber == 1)
     CardHolder player = blackjack.Player;
 
     blackjack.NewGame();
-    Console.WriteLine($"DEBUG> Program.cs: Dealer now has {dealer.HeldCards.Count} cards");
-    Console.WriteLine($"DEBUG> Program.cs: Player now has {player.HeldCards.Count} cards");
+    // Console.WriteLine($"DEBUG> Program.cs: Dealer now has {dealer.HeldCards.Count} cards");
+    // Console.WriteLine($"DEBUG> Program.cs: Player now has {player.HeldCards.Count} cards");
 
     bool keepPlaying = true;
 
