@@ -63,7 +63,11 @@ namespace CheshireDiore.PlayingCards
             // Prompt player to hit or stand
             Console.WriteLine("");
             Console.WriteLine("Hit (h) or Stand (s) (q to quit)?");
-            string playerResponse = Console.ReadLine();
+            string? playerResponse = Console.ReadLine();
+            if (playerResponse is null)
+            {
+                playerResponse = "q";
+            }
             if (playerResponse == "q")
             {
                 return false;
