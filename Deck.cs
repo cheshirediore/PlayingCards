@@ -18,10 +18,7 @@ namespace CheshireDiore.PlayingCards
 
         public void AddCard(Card card)
         {
-            // // Console.WriteLine($"DEBUG> Deck.cs: Adding card: {card}");
             _cards.Push(card);
-            // // Console.WriteLine($"DEBUG> Deck.cs: Deck now contains {_cards.Count} cards.");
-            // // Console.WriteLine($"DEBUG> Deck.cs: Deck stack now has a capacity of {_cards.Capacity}.");
         }
         public Card DrawCard()
         {
@@ -41,12 +38,12 @@ namespace CheshireDiore.PlayingCards
             // Start the shuffling
             for (int i = workingCopy.Length - 1; i >= 0; i--)
             {
-                // // Console.WriteLine($"DEBUG> Deck.cs: i = {i}");
+                // Get the first value as the value at the current index
                 var value1 = workingCopy[i];
+                // Get the second value as some index smaller than (or equal to) the current index
                 int randomlySelectedIndex = random.Next(i);
-                // // Console.WriteLine($"DEBUG> Deck.cs: j = {randomlySelectedIndex}");
                 var value2 = workingCopy[randomlySelectedIndex];
-                // // Console.WriteLine($"DEBUG> Deck.cs: Swapping {value1} and {value2}");
+                // Swap the values in the two selected indices
                 workingCopy[i] = value2;
                 workingCopy[randomlySelectedIndex] = value1;
             }
@@ -63,26 +60,11 @@ namespace CheshireDiore.PlayingCards
             Deck dealtCards = new();
             for (int i = 0; i < cardCount; i++)
             {
-                // _cards.Pop());
                 Card card = DrawCard();
-                // // Console.WriteLine($"DEBUG> Deck.cs: Dealing {card}...");
                 dealtCards.AddCard(card);
             }
-            // // Console.WriteLine($"DEBUG> Deck.cs: Dealt {dealtCards.Count} cards");
             return dealtCards;
         }
 
-        public void FillDeck()
-        {
-            // Add the 52 standard playing cards
-            for (int suit = 0; suit < 4; suit++)
-            {
-                for (int rank = 2; rank < 15; rank++)
-                {
-                    Card card = new(rank, suit);
-                    AddCard(card);
-                }
-            }
-        }
     }
 }

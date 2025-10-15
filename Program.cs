@@ -2,17 +2,17 @@
 
 int TestNumber = 1;
 
-// Test the basic methods of the Deck class
+// Test the basic methods of the PlayingCardDeck class
 if (TestNumber == 0)
 {
     // Initialize an empty deck
-    Deck deck = new();
+    PlayingCardDeck deck = new();
     deck.FillDeck();
     // Shuffle the deck
     deck.Shuffle();
 
     // Deal a hand of 5 cards from the deck
-    Deck hand = deck.Deal(5);
+    PlayingCardDeck hand = deck.Deal(5);
     // Read each card from hand
     foreach (Card card in hand.Cards)
     {
@@ -25,7 +25,7 @@ if (TestNumber == 1)
 {
     BlackJack blackjack = new();
 
-    Deck drawpile = blackjack.DrawPile;
+    PlayingCardDeck drawpile = blackjack.DrawPile;
     CardHolder dealer = blackjack.Dealer;
     CardHolder player = blackjack.Player;
 

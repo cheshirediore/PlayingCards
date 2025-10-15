@@ -4,8 +4,8 @@ namespace CheshireDiore.PlayingCards
     {
         private CardHolder[] _cardholders;
         public CardHolder[] CardHolders => _cardholders;
-        private Deck _drawpile;
-        public Deck DrawPile => _drawpile;
+        private PlayingCardDeck _drawpile;
+        public PlayingCardDeck DrawPile => _drawpile;
         public CardHolder Dealer => _cardholders[0];
         public CardHolder Player => _cardholders[1];
         public BlackJack()
@@ -161,8 +161,8 @@ namespace CheshireDiore.PlayingCards
                     return false;
                 }
                 Console.WriteLine("=== Press Enter to Continue ==");
-                string playerResponse = Console.ReadLine();
-                if (playerResponse == "q")
+                string? playerResponse = Console.ReadLine();
+                if (playerResponse is null || playerResponse == "q")
                 {
                     return false;
                 }
