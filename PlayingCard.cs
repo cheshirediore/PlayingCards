@@ -1,13 +1,14 @@
 namespace CheshireDiore.PlayingCards
 {
-    public class Card
+    public class PlayingCard
     {
         private int _rank; // Aces high
         private int _suit; // 0 = Spades, 1 = Clubs, 2 = Hearts, 3 = Diamonds
 
         public int Rank => _rank;
-
-        public string Suit => _suitToString[_suit];
+        public string RankString => _rankToString[_rank];
+        public int Suit => _suit;
+        public string SuitString => _suitToString[_suit];
 
         private static Dictionary<int, string> _suitToString = new Dictionary<int, string>{
             {0, "Spades"},
@@ -32,7 +33,7 @@ namespace CheshireDiore.PlayingCards
             {14, "Ace"}
         };
 
-        public Card(int rank, int suit)
+        public PlayingCard(int rank, int suit)
         {
             _rank = rank;
             _suit = suit;

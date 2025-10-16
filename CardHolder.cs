@@ -4,13 +4,13 @@ namespace CheshireDiore.PlayingCards
     public class CardHolder
     // CardHolder can be a player or a dealer. Anyone who has and uses a deck or hand of cards
     {
-        private Deck _heldcards;
-        public Deck HeldCards {
+        private PlayingCardDeck _heldcards;
+        public PlayingCardDeck HeldCards {
             get => _heldcards;
             set => _heldcards = value;
         }
 
-        public Card[] CardsArray => HeldCards.Cards.ToArray();
+        public PlayingCard[] CardsArray => HeldCards.Cards.ToArray();
 
         public CardHolder()
         {
@@ -36,22 +36,22 @@ namespace CheshireDiore.PlayingCards
         }
 
         // TODO: Handle an empty deck
-        public void Draw(Deck deck)
+        public void Draw(PlayingCardDeck deck)
         {
             // Draw a card from the given deck and add it to hand
             HeldCards.AddCard(deck.DrawCard());
         }
 
-        public void Discard(int[] cardIndices, Deck discardPile)
+        public void Discard(int[] cardIndices, PlayingCardDeck discardPile)
         {
             // Discard the specific cards at cardIndices
-            Console.WriteLine("CardHolder.Discard(int[], Deck) not implemented.");
+            Console.WriteLine("CardHolder.Discard(int[], PlayingCardDeck) not implemented.");
         }
 
-        public void Discard(int howMany, Deck discardPile)
+        public void Discard(int howMany, PlayingCardDeck discardPile)
         {
             // Discard the top howMany cards
-            Console.WriteLine("CardHolder.Discard(int, Deck) not implemented.");
+            Console.WriteLine("CardHolder.Discard(int, PlayingCardDeck) not implemented.");
             for (int i = 0; i < howMany; i++)
             {
                 discardPile.AddCard(_heldcards.DrawCard());

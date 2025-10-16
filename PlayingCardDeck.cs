@@ -2,28 +2,25 @@
 namespace CheshireDiore.PlayingCards
 {
 
-    public class Deck
+    public class PlayingCardDeck
     {
 
-        public Stack<Card> _cards;
+        public Stack<PlayingCard> _cards;
 
-        public Stack<Card> Cards => _cards;
+        public Stack<PlayingCard> Cards => _cards;
 
         public int Count => _cards.Count;
 
-        public Deck()
+        public PlayingCardDeck()
         {
-            _cards = new Stack<Card>(); 
+            _cards = new Stack<PlayingCard>(); 
         }
 
-        public void AddCard(Card card)
+        public void AddCard(PlayingCard card)
         {
-            // // Console.WriteLine($"DEBUG> Deck.cs: Adding card: {card}");
             _cards.Push(card);
-            // // Console.WriteLine($"DEBUG> Deck.cs: Deck now contains {_cards.Count} cards.");
-            // // Console.WriteLine($"DEBUG> Deck.cs: Deck stack now has a capacity of {_cards.Capacity}.");
         }
-        public Card DrawCard()
+        public PlayingCard DrawCard()
         {
             return _cards.Pop();
         }
@@ -37,38 +34,35 @@ namespace CheshireDiore.PlayingCards
             //     j ← random integer such that 0 ≤ j ≤ i
             //     exchange a[j] and a[i]
             // Make a copy of the stack's backing array
-            Card[] workingCopy = _cards.ToArray();
+            PlayingCard[] workingCopy = _cards.ToArray();
             // Start the shuffling
             for (int i = workingCopy.Length - 1; i >= 0; i--)
             {
-                // // Console.WriteLine($"DEBUG> Deck.cs: i = {i}");
+                // Get the first value as the value at the current index
                 var value1 = workingCopy[i];
+                // Get the second value as some index smaller than (or equal to) the current index
                 int randomlySelectedIndex = random.Next(i);
-                // // Console.WriteLine($"DEBUG> Deck.cs: j = {randomlySelectedIndex}");
                 var value2 = workingCopy[randomlySelectedIndex];
-                // // Console.WriteLine($"DEBUG> Deck.cs: Swapping {value1} and {value2}");
+                // Swap the values in the two selected indices
                 workingCopy[i] = value2;
                 workingCopy[randomlySelectedIndex] = value1;
             }
             _cards.Clear();
-            foreach (Card card in workingCopy)
+            foreach (PlayingCard card in workingCopy)
             {
                 AddCard(card);
             }
 
         }
 
-        public Deck Deal(int cardCount)
+        public PlayingCardDeck Deal(int cardCount)
         {
-            Deck dealtCards = new();
+            PlayingCardDeck dealtCards = new();
             for (int i = 0; i < cardCount; i++)
             {
-                // _cards.Pop());
-                Card card = DrawCard();
-                // // Console.WriteLine($"DEBUG> Deck.cs: Dealing {card}...");
+                PlayingCard card = DrawCard();
                 dealtCards.AddCard(card);
             }
-            // // Console.WriteLine($"DEBUG> Deck.cs: Dealt {dealtCards.Count} cards");
             return dealtCards;
         }
 
@@ -79,7 +73,7 @@ namespace CheshireDiore.PlayingCards
             {
                 for (int rank = 2; rank < 15; rank++)
                 {
-                    Card card = new(rank, suit);
+                    PlayingCard card = new(rank, suit);
                     AddCard(card);
                 }
             }
