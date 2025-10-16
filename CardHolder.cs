@@ -10,7 +10,7 @@ namespace CheshireDiore.PlayingCards
             set => _heldcards = value;
         }
 
-        public Card[] CardsArray => HeldCards.Cards.ToArray();
+        public PlayingCard[] CardsArray => HeldCards.Cards.ToArray();
 
         public CardHolder()
         {

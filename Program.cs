@@ -14,7 +14,7 @@ if (TestNumber == 0)
     // Deal a hand of 5 cards from the deck
     PlayingCardDeck hand = deck.Deal(5);
     // Read each card from hand
-    foreach (Card card in hand.Cards)
+    foreach (PlayingCard card in hand.Cards)
     {
         // Console.WriteLine($"DEBUG> Program.cs: {card}");
     }

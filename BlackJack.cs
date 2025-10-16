@@ -105,7 +105,7 @@ namespace CheshireDiore.PlayingCards
             int tally = 0;
             for (int i = 0; i < cardHolder.CardsArray.Length; i++)
             {
-                Card card = cardHolder.CardsArray[i];
+                PlayingCard card = cardHolder.CardsArray[i];
                 tally += GetCardValue(card.Rank);
             }
             // Console.WriteLine($"Tally is {tally}");
@@ -147,7 +147,7 @@ namespace CheshireDiore.PlayingCards
 
                 // If the player has chosen to stand, deal cards for dealer while the dealer's sum is less than 17
                 Dealer.Draw(DrawPile);
-                Console.WriteLine("The Dealer Draws a Card:");
+                Console.WriteLine("The Dealer Draws a PlayingCard:");
                 Dealer.PrintHeldCards();
 
                 // Tally dealer's hand and check if they bust

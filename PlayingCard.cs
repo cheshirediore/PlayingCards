@@ -1,6 +1,6 @@
 namespace CheshireDiore.PlayingCards
 {
-    public class Card
+    public class PlayingCard
     {
         private int _rank; // Aces high
         private int _suit; // 0 = Spades, 1 = Clubs, 2 = Hearts, 3 = Diamonds
@@ -33,7 +33,7 @@ namespace CheshireDiore.PlayingCards
             {14, "Ace"}
         };
 
-        public Card(int rank, int suit)
+        public PlayingCard(int rank, int suit)
         {
             _rank = rank;
             _suit = suit;
